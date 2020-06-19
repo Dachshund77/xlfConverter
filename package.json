@@ -1,0 +1,19 @@
+{
+    "name": "xlfconverter",
+    "version": "0.0.1",
+    "description": "Package to convert xlf to various other formats",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "xlf",
+        "i18n"
+    ],
+    "author": "Sven Büchner",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Dachshund77/xlfConverter.git"
+    }
+}
