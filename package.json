@@ -15,5 +15,10 @@
     "repository": {
         "type": "git",
         "url": "https://github.com/Dachshund77/xlfConverter.git"
-    }
+    },
+    "dependencies": {
+        "xlsx": "^0.16.2",
+        "xml2js": "^0.4.23"
+    },
+    "devDependencies": {}
 }
