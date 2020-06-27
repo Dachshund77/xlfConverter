@@ -1,6 +1,6 @@
 {
     "name": "xlfconverter",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "description": "Package to convert xlf to various other formats",
     "main": "index.js",
     "scripts": {
