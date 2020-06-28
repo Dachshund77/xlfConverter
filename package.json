@@ -4,7 +4,7 @@
     "description": "Package to convert xlf to various other formats",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "mocha"
     },
     "keywords": [
         "xlf",
@@ -21,5 +21,9 @@
         "xml2js": "^0.4.23",
         "yargs": "^15.3.1"
     },
-    "devDependencies": {}
+    "devDependencies": {
+        "chai": "^4.2.0",
+        "mocha": "^8.0.1",
+        "sinon": "^9.0.2"
+    }
 }

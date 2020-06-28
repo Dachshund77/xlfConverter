@@ -2,8 +2,8 @@ var xlf2sheet = require("./lib/xlf2sheet.js")
 var sheet2xlf = require("./lib/sheet2xlf.js");
 
 
-var argv = require('yargs')
-    .usage('Usage: $0 <command> [options]')
+var argv = require('yargs').
+usage('Usage: $0 <command> [options]')
     .command('toXlf', 'Conversion of Sheet to Xlf file', (yargs) => {
         yargs
             .usage("Usage: $0 toXlf [options]")
@@ -19,7 +19,6 @@ var argv = require('yargs')
                 demandOption: true,
                 type: 'string'
             })
-
 
         sheet2xlf.convert(yargs.argv)
     })
@@ -37,9 +36,7 @@ var argv = require('yargs')
                 description: 'Output file/dir',
                 demandOption: true,
                 type: 'string'
-
             })
-
 
         xlf2sheet.convert(yargs.argv)
     })
@@ -48,18 +45,8 @@ var argv = require('yargs')
     .help('h')
     .alias('help', 'h')
     .alias('version', 'v')
+    .showHelpOnFail(true)
+    .strict()
     .argv;
 
-
-
 console.log(argv);
-
-
-
-/*
-console.debug("xlf >>> sheet")
-xlf2sheet.convert("messages.en.xlf");
-
-console.debug("sheet >>> xlf")
-sheet2xlf.convert("Test.ods");
-*/
