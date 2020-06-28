@@ -1,25 +1,17 @@
-var sinon = require('sinon');
-var assert = require('chai').assert;
+var assert = require('chai').assert
 var expect = require('chai').expect;
+
+var fs = require('fs');
+var xml2js = require('xml2js');
+var xlsx = require('xlsx')
+
+var sheet2xlf = require('../lib/sheet2xlf.js')
 
 describe('Tests for sheet2Xlf.js', function() {
 
-    var xlf2sheetStub;
-    var sheet2XlfStub;
-
-    //Setup test enviroment
-    beforeEach(function() {
-        xlf2sheetStub = sinon.stub(require('../lib/xlf2sheet.js'), 'convert');
-        sheet2XlfStub = sinon.stub(require('../lib/sheet2xlf.js'), 'convert');
-    });
-
-    //Teardown test enviroment
-    afterEach(function() {
-        xlf2sheetStub.restore();
-        sheet2XlfStub.restore();
-    });
 
     //Clean up files
+
     afterEach(function() {
         var fs = require('fs');
 
@@ -38,11 +30,36 @@ describe('Tests for sheet2Xlf.js', function() {
 
     });
 
-    describe('CLI Tests, testing the entry in application', function() {
+    describe('Conver(argv) tests', function() {
+        context('Deep equality test after conversion', function() {
+            it('PARAMS AND RESULT', async function() {
+                //Arrange
+                var parser = new xml2js.Parser();
+                data = await fs.promises.readFile('./testAssets/xlf/TestFile1.en.xlf');
+                var orginalXlf;
+                await parser.parseStringPromise(data).then(function(result) {
+                    orginalXlf = result;
+                })
 
-        context('TEST 1', function() {
-            it('PARAMS AND RESULT', function() {
-                assert.isTrue(true)
+                //Act
+
+                await sheet2xlf.convert({ file: "./testAssets/sheet/TestSheet1.ods", out: "./testOut/temp.xlf" })
+
+
+                var parser2 = new xml2js.Parser();
+                data2 = await fs.promises.readFile('./testOut/temp.xlf');
+
+
+
+                //var cleanedString = data2.toString().replace("\ufeff", "");
+                var convertedXLF;
+                await parser2.parseStringPromise(data2).then(function(result2) {
+                    convertedXLF = result2;
+                })
+
+                //Assert
+                expect(orginalXlf).to.be.deep.equal(convertedXLF)
+
             })
         })
     })

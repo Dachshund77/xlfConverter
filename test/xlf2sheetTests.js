@@ -8,46 +8,41 @@ var xlsx = require('xlsx')
 var xlf2Sheet = require('../lib/xlf2sheet.js')
 
 describe('Tests for xlf2Sheet.js', function() {
-    /*
-        //Clean up files
-        afterEach(function() {
-            var fs = require('fs');
 
-            //Rading all files in testOut
-            fs.readdir('testOut', function(err, files) {
-                files.forEach(element => {
+    //Clean up files
+    afterEach(function() {
+        var fs = require('fs');
 
-                    //Deleting all found files
-                    console.log(element);
-                    fs.unlink('testOut/' + element, function(err) {
-                        if (err) throw err;
-                    });
+        //Rading all files in testOut
+        fs.readdir('testOut', function(err, files) {
+            files.forEach(element => {
 
+                //Deleting all found files
+                console.log(element);
+                fs.unlink('testOut/' + element, function(err) {
+                    if (err) throw err;
                 });
+
             });
-    */
-});
+        });
+        console.log('AFTER EACH');
 
-describe('CLI Tests, testing the entry in application', function() {
+    });
 
-    context('TEST 1', function() {
-        it('PARAMS AND RESULT', async function() {
-            //Arrange
-            var originalWB = xlsx.readFile('./testAssets/sheet/TestSheet1.ods')
+    describe('convert(argv) tests', function() {
 
-            //Act
-            await xlf2Sheet.convert({ file: "./testAssets/xlf/TestFile1.en.xlf", out: "./testOut/temp.ods" })
-            var createdWB = xlsx.readFile('./testOut/temp.ods')
+        context('Deep equality test after conversion', function() {
+            it('Converting TestFile.en.xlf and comparing with TestSheet1.ods', async function() {
+                //Arrange
+                var originalWB = xlsx.readFile('./testAssets/sheet/TestSheet1.ods')
 
-            //Assert
-            expect(originalWB).to.be.deep.equal(createdWB)
+                //Act
+                await xlf2Sheet.convert({ file: "./testAssets/xlf/TestFile1.en.xlf", out: "./testOut/temp.ods" })
+                var createdWB = xlsx.readFile('./testOut/temp.ods')
 
-        })
-    })
-
-    context('TEST 2', function() {
-        it('PARAMS AND RESULT', function() {
-            assert.isTrue(true)
+                //Assert
+                expect(originalWB).to.be.deep.equal(createdWB)
+            })
         })
     })
 })
