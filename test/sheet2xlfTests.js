@@ -20,7 +20,6 @@ describe('Tests for sheet2Xlf.js', function() {
             files.forEach(element => {
 
                 //Deleting all found files
-                console.log(element);
                 fs.unlink('testOut/' + element, function(err) {
                     if (err) throw err;
                 });

@@ -18,14 +18,12 @@ describe('Tests for xlf2Sheet.js', function() {
             files.forEach(element => {
 
                 //Deleting all found files
-                console.log(element);
                 fs.unlink('testOut/' + element, function(err) {
                     if (err) throw err;
                 });
 
             });
         });
-        console.log('AFTER EACH');
 
     });
 
